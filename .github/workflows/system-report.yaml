@@ -1,0 +1,41 @@
+name: System Report
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    system-info:
+        runs-on: ubuntu-latest
+        steps:
+            - name: OS name
+              run: uname -a
+            - name: Free disk
+              run: df -h
+            - name: Current status
+              run: uptime
+            - name: Install tree using apt-get
+              run: sudo apt-get install tree -y
+            - name: Display directory structure
+              run: tree -L 2
+    tool-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Install jq using apt-get
+              run: sudo apt-get install jq -y
+            - name: Create report.json file
+              run: |
+                echo '{"name": "John", "age": 30, "city": "New York"}' > report.json
+                echo '{"name": "John", "age": 30, "city": "New York"}' > report.json
+                echo '{"name": "John", "age": 30, "city": "New York"}' > report.json
+            - name: read report.json file using jq
+              run: jq '.' report.json
+            - name: Print versions of python  git jq
+              run: |
+                    python3 --version
+                    git --version
+                    jq --version
+            - name: completed
+              run: echo "Report completd"
+            
